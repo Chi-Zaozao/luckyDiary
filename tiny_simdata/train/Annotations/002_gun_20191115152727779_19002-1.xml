@@ -1,0 +1,32 @@
+<?xml version="1.0" ?><annotation>
+	<folder>simi-data-201710</folder>
+	<filename>002_gun_20191115152727779_19002-1.jpg</filename>
+	<source>
+		<database>simi-data-201710</database>
+		<annotation>simi-data-201710</annotation>
+		<image>flickr</image>
+		<flickrid>201701018</flickrid>
+	</source>
+	<owner>
+		<flickrid>Random</flickrid>
+		<name>SimImage</name>
+	</owner>
+	<size>
+		<width>190</width>
+		<height>380</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>gun</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>107</xmin>
+			<ymin>190</ymin>
+			<xmax>145</xmax>
+			<ymax>220</ymax>
+		</bndbox>
+	</object>
+</annotation>
