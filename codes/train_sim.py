@@ -1,4 +1,4 @@
-# python3 train_sim.py --config-file='../projects/TridentNet/configs/tridentnet_fast_R_50_C4_1x.yaml' --num-gpus 4 SOLVER.IMS_PER_BATCH 4 
+# python3 train_sim.py --config-file='../../projects/TridentNet/configs/tridentnet_fast_R_50_C4_1x.yaml' --num-gpus 4 SOLVER.IMS_PER_BATCH 4 
 import os
 
 import detectron2.utils.comm as comm
@@ -6,7 +6,7 @@ from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
 from detectron2.engine import DefaultTrainer, default_argument_parser, default_setup, launch
 from detectron2.evaluation import COCOEvaluator, verify_results
-from codes.get_tinysim import get_tinysim
+from get_tinysim import get_tinysim
 from detectron2.data import DatasetCatalog, MetadataCatalog
 
 from projects.TridentNet.tridentnet import add_tridentnet_config
@@ -37,9 +37,9 @@ def setup(args):
 
 def main(args):
     for d in ['train','val']:
-        DatasetCatalog.register('tiny_simdata/'+d, lambda d = d: get_tinysim('tiny_simdata/'+d))
+        DatasetCatalog.register('tiny_simdata/'+d, lambda d = d: get_tinysim('../tiny_simdata/'+d))
         MetadataCatalog.get('tiny_simdata/'+d).set(thing_classes=['gun','lighter'])
-        MetadataCatalog.get('tiny_simdata/'+d).set(json_file='tiny_simdata/'+d+'/annotations.json')
+        MetadataCatalog.get('tiny_simdata/'+d).set(json_file='../tiny_simdata/'+d+'/annotations.json')
     object_metadata=MetadataCatalog.get('tiny_simdata/train') 
     cfg = setup(args)
 
@@ -60,6 +60,8 @@ def main(args):
 if __name__ == "__main__":
     args = default_argument_parser().parse_args()
     print("Command Line Args:", args)
+#     specify the visible gpus
+#     os.environ["CUDA_VISIBLE_DEVICES"] = '0,3'
     launch(
         main,
         args.num_gpus,
