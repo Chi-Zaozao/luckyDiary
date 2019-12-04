@@ -88,7 +88,7 @@ def xml2json(img_dir, output_dir = None):
         for c in root.iter():
             if c.tag == 'filename':
                 filename = c.text
-                img_record['filename'] = filename
+                img_record['file_name'] = filename
                 img_record['id']=int(filename[:-4].replace('-',''))
             if c.tag=='bndbox':
                 bboxes.append(c)
@@ -103,13 +103,11 @@ def xml2json(img_dir, output_dir = None):
             box=[]
             for b in bbox.iterchildren():
                 box.append(int(b.text))
-            x = (box[0] + box[2])/2
-            y = (box[1] + box[3])/2
             assert(box[2] > box[0])
             assert(box[3] > box[1])
             width = box[2] - box[0]
             height = box[3] - box[1]
-            anno_record['bbox'] = [x, y, width, height]
+            anno_record['bbox'] = [box[0], box[1], width, height]
             anno_record['area'] = float(width*height)
             annotations.append(anno_record)
         images.append(img_record)
